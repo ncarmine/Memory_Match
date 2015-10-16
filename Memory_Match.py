@@ -1,4 +1,4 @@
-#Simple Memory Match Game
+#Memory Match Game by Nathan Carmine
 
 import pygame
 from pygame.locals import *
@@ -21,7 +21,7 @@ def card_check(mouse_pos):
     card = (CardX, CardY)
     return card
 
-#Draw the cards. This is used after initializsation and to rehide cards
+#Draw the cards. This is used after initialization and to rehide cards
 def card_draw(cards):
     pygame.init()
     DISPLAY_SIZE = (750, 905)
@@ -53,7 +53,7 @@ def cards_init():
     cards.append(joker_load)
 
     #Multiply the deck by two so there is one pair of everything
-    cards *= 2 #Python is so great - just double the list to duplicate!
+    cards *= 2 #Python is great - just double the list to duplicate!
 
     #Shuffle the deck for a new game every time
     random.shuffle(cards)
@@ -74,7 +74,7 @@ def main(runs):
 
     card_deck = cards_init() #initialize deck
 
-    #load card-back image for all cards at first, and have matches slowly unveiled
+    #Load card-back image for all cards at first, and have matches slowly unveiled
     card_back = pygame.image.load("./card_images/card_back.png")
     visible_deck = []
     for x in range(30):
@@ -105,7 +105,7 @@ def main(runs):
 
         #Retreives all user input
         for event in user_input:
-            #But is the input mouse button down?
+            #Is the input mouse button pressed down?
             if event.type == pygame.MOUSEBUTTONDOWN:
                 #Get position of mouse and put it into card_check
                 #to figure out which card mouse is on
@@ -117,12 +117,12 @@ def main(runs):
                     #Put the actual value of the card on the screen (vs just the back)
                     if len(flips) <= 2:
                         screen.blit(card_deck[6*card_select[1]+card_select[0]], (125*card_select[0],181*card_select[1]))
-                        first_flip = time.time() #first card has been flipped
+                        first_flip = time.time() #First card has been flipped
                     if len(flips) == 2:
-                        second_flip = time.time() #second card has been flipped
-                        match = match_check(card_deck, flips) #are the two cards a match?
+                        second_flip = time.time() #Second card has been flipped
+                        match = match_check(card_deck, flips) #Are the two cards a match?
                         if match:
-                            #if a match, append coordinates of two cards to found array,
+                            #If a match, append coordinates of two cards to found array,
                             #and have them permanently displayed by adding them to the visible deck
                             for i in range(2):
                                 found.append(flips[i])
@@ -155,7 +155,7 @@ def main(runs):
             found.append("WIN")
             print "YOU WIN!"
             print "Score: %d misses" % missed
-            print "\nPlay again? (y/n)" #no raw_input to avoid wrong characters
+            print "\nPlay again? (y/n)" #User presses "y" or "n" in the card window
             runs = 2
 
         if runs == 2: #Win mode of main
